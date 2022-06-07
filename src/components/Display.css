@@ -1,0 +1,10 @@
+.result{
+    width: 180px;
+    height: 30px;
+    /* border: 1px solid red; */
+    margin-bottom: 4px;
+    background-color: beige;
+    padding: 10px;
+    color: black;
+    font-size: 30px;
+}
