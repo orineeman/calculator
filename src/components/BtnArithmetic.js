@@ -3,7 +3,7 @@ import "./BtnArithmetic.css";
 function BtnArithmetic({arithmetic, arithmetics}){
     return(
         
-    <button 
+    <button className="btn-Arithmetic" 
     onClick= {()=> arithmetics({arithmetic})}
     >{arithmetic}</button>
 )}

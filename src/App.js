@@ -8,61 +8,88 @@ import Display2 from "./components/Display2";
 let num1 = [];
 let num2 = [];
 let result = 0;
-let act;
+let act = [];
+let lastResult = [];
+let number1IsTrue = false;
 function App() {
   const arrNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
   const arrArithmetics = ["+", "-", "*", "/", "=", "AC"];
-  const [results, setResults] = useState(result);
-  const [targil, setTargil] = useState("");
+  const [results, setResults] = useState(0);
+  const [arithmeticExpression, setArithmeticExpression] = useState("");
 
   function arithmetics({ arithmetic }) {
-    if (arithmetic === "=") {
-      let number1 = num1.join("");
-      let number2 = num2.join("");
-      console.log(num1);
-      console.log(num2);
-      if (act === "+") {
-        setResults(parseInt(number1) + parseInt(number2));
-      } else if (act === "-") {
-        setResults(number1 - number2);
-      } else if (act === "*") {
-        setResults(number1 * number2);
-      } else if (act === "/") {
-        setResults(number1 / number2);
-      }
-      num1 = [];
-      num2 = [];
-      act = "";
-      setTargil("");
+    act.push(arithmetic);
+    if (act[act.length - 1] === "=") {
+      calculation();
     } else if (arithmetic === "AC") {
       num1 = [];
       num2 = [];
-      act = "";
+      act = [];
       setResults(0);
-      setTargil("");
+      setArithmeticExpression("");
     } else {
-      act = arithmetic;
-      console.log("ori", targil + act);
-      setTargil(targil + act);
+      if (num2.length > 0) {
+        calculation();
+        setArithmeticExpression(result + act[act.length - 1]);
+      } else if (num1.length > 0) {
+        act[act.length - 1] = arithmetic;
+        setArithmeticExpression(num1.join("") + act[act.length - 1]);
+      } else {
+        act[act.length - 1] = arithmetic;
+        setArithmeticExpression(arithmeticExpression + act[act.length - 1]);
+      }
     }
   }
 
-  function numForCalculation(number) {
-    if (act === "+" || act === "-" || act === "*" || act === "/") {
-      num2.push(number);
-      setTargil(targil + number);
-      console.log("check", targil + number);
-    } else {
-      num1.push(number);
-      setTargil(targil + number);
+  function calculation() {
+    let number1 = num1.join("");
+    let number2 = num2.join("");
+    if (act[act.length - 2] === "+") {
+      result = parseInt(number1) + parseInt(number2);
+    } else if (act[act.length - 2] === "-") {
+      result = number1 - number2;
+    } else if (act[act.length - 2] === "*") {
+      result = number1 * number2;
+    } else if (act[act.length - 2] === "/") {
+      result = number1 / number2;
     }
+    setResults(result);
+
+    let convertToString = result.toString();
+    lastResult = [];
+    for (let i = 0; i < convertToString.length; i++) {
+      lastResult.push(convertToString[i]);
+    }
+    number1IsTrue = true;
+    num1 = lastResult;
+    num2 = [];
+    setArithmeticExpression("");
+  }
+
+  function numForCalculation(number) {
+    if (
+      act[act.length - 1] === "+" ||
+      act[act.length - 1] === "-" ||
+      act[act.length - 1] === "*" ||
+      act[act.length - 1] === "/"
+    ) {
+      num2.push(number);
+    } else {
+      if (number1IsTrue) {
+        num1 = [];
+        setResults(0);
+        number1IsTrue = !number1IsTrue;
+      }
+      num1.push(number);
+    }
+    setArithmeticExpression(arithmeticExpression + number);
   }
 
   return (
     <div className="App">
       <div>
         <Display result={results} />
-        <Display2 targil={targil} />
+        <Display2 arithmeticExpression={arithmeticExpression} />
       </div>
       <div>
         <Buttons

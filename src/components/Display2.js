@@ -1,8 +1,8 @@
 import "./Display2.css";
 
-function Display2({targil}){
+function Display2({arithmeticExpression}){
     return(
-    <div className="targil">{targil}</div>
+    <div className="arithmetic-expression">{arithmeticExpression}</div>
 )}
 
 export default Display2;

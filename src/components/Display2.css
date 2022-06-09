@@ -1,4 +1,4 @@
-.targil {
+.arithmetic-expression {
     width: 180px;
     height: 20px;
     /* border: 1px solid red; */
@@ -7,4 +7,5 @@
     padding: 10px;
     color: black;
     font-size: 30px;
+    border-radius: 10px;
 }
