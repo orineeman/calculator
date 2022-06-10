@@ -9,6 +9,8 @@ button{
     margin-bottom: 10px;
     background-color: rgb(34, 151, 253);
     color: azure;
+    font-style: italic;
+    font-size: large;
 
 }
 button:hover{

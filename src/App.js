@@ -1,16 +1,17 @@
 import { useState } from "react";
 import "./App.css";
-import Arithmetics from "./components/Arithmetics";
-import Buttons from "./components/Buttons";
-import Display from "./components/Display";
-import Display2 from "./components/Display2";
+import Arithmetics from "./components/Arithmetics/Arithmetics";
+import Buttons from "./components/Buttons/Buttons";
+import Display from "./components/Display/Display";
+import Display2 from "./components/Display2/Display2";
 
 let num1 = [];
 let num2 = [];
-let result = 0;
 let act = [];
 let lastResult = [];
+let result = 0;
 let number1IsTrue = false;
+
 function App() {
   const arrNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
   const arrArithmetics = ["+", "-", "*", "/", "=", "AC"];
@@ -19,7 +20,7 @@ function App() {
 
   function arithmetics({ arithmetic }) {
     act.push(arithmetic);
-    if (act[act.length - 1] === "=") {
+    if (arithmetic === "=") {
       calculation();
     } else if (arithmetic === "AC") {
       num1 = [];
@@ -60,6 +61,7 @@ function App() {
     for (let i = 0; i < convertToString.length; i++) {
       lastResult.push(convertToString[i]);
     }
+    
     number1IsTrue = true;
     num1 = lastResult;
     num2 = [];

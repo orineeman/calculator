@@ -2,7 +2,7 @@ import "./Display2.css";
 
 function Display2({arithmeticExpression}){
     return(
-    <div className="arithmetic-expression">{arithmeticExpression}</div>
+    <input className="arithmetic-expression" value={arithmeticExpression} readOnly/>
 )}
 
 export default Display2;
