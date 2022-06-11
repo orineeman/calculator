@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState ,} from "react";
 import "./App.css";
 import Arithmetics from "./components/Arithmetics/Arithmetics";
 import Buttons from "./components/Buttons/Buttons";
+import Clock from "./components/Clock/Clock";
 import Display from "./components/Display/Display";
 import Display2 from "./components/Display2/Display2";
 
@@ -11,8 +12,13 @@ let act = [];
 let lastResult = [];
 let result = 0;
 let number1IsTrue = false;
+let currentdate = new Date();
+let date;
+
+
 
 function App() {
+ 
   const arrNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
   const arrArithmetics = ["+", "-", "*", "/", "=", "AC"];
   const [results, setResults] = useState(0);
@@ -86,9 +92,18 @@ function App() {
     }
     setArithmeticExpression(arithmeticExpression + number);
   }
+  
+    date = currentdate.getDate() + "/"
+    + (currentdate.getMonth()+1)  + "/" 
+    + currentdate.getFullYear() 
 
   return (
     <div className="App">
+      <div className="time">
+      <div>{date}</div>
+      <div> <Clock/>
+      </div>
+      </div>
       <div>
         <Display result={results} />
         <Display2 arithmeticExpression={arithmeticExpression} />
@@ -104,8 +119,11 @@ function App() {
           arithmetics={arithmetics}
         />
       </div>
+     
     </div>
+
   );
 }
+
 
 export default App;
